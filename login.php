@@ -18,7 +18,7 @@
     //se conecta a la base de datos
     $mysql->conectar();    
     //respectiva consulta para la seleccion de usuario
-    $seleccionUsuario = $mysql->efectuarConsulta("SELECT teatro.tipo_usuario.id, teatro.tipo_usuario.nombre from tipo_usuario");     
+    $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario");     
     //se desconecta de la base de datos
     $mysql->desconectar();    
     ?>
@@ -44,7 +44,7 @@
                   while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
                 ?> 
                 <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                    <option value="<?php echo $resultado['id']?>"><?php echo $resultado['nombre']?></option>                                                
+                    <option value="<?php echo $resultado['id_tipo_usuario']?>"><?php echo $resultado['nombre']?></option>                                                
                 <?php
                   }
                 ?>

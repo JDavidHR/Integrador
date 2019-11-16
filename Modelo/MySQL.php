@@ -8,7 +8,7 @@ class MySQL{
     private $user = "root";
     private $password = "";
     private $puerto = "3306";
-    private $database = "teatro";
+    private $database = "asistencia";
     
     private $conexion;
     

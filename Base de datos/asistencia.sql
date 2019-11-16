@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 18:43:49
+-- Tiempo de generación: 16-11-2019 a las 19:08:31
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -33,6 +33,7 @@ CREATE TABLE `administrador` (
   `documento` varchar(45) NOT NULL COMMENT 'Documento del administrador',
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del administrador',
   `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del administrador',
+  `contrasena` varchar(150) NOT NULL,
   `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -40,9 +41,9 @@ CREATE TABLE `administrador` (
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apellidos`, `tipo_usuario_id_tipo_usuario`) VALUES
-(1, '1006318241', 'Natalia', 'Agudelo Valdes', 3),
-(2, '1006291396', 'Juan David', 'Hoyos Ramirez', 3);
+INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apellidos`, `contrasena`, `tipo_usuario_id_tipo_usuario`) VALUES
+(1, '1006318241', 'Natalia', 'Agudelo Valdes', '1234', 3),
+(2, '1006291396', 'Juan David', 'Hoyos Ramirez', '1234', 3);
 
 -- --------------------------------------------------------
 

@@ -135,55 +135,10 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin5">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">Registro Estudiantes</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-profile.html" aria-expanded="false">
-                                <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">Registro Docentes</span>
-                            </a>
-                        </li>
-                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="form-basic.html" aria-expanded="false">
-                                <i class="mdi mdi-arrange-bring-forward"></i>
-                                <span class="hide-menu">Registro Aulas</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false">
-                                <i class="mdi mdi-border-none"></i>
-                                <span class="hide-menu">Registro Materias</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html" aria-expanded="false">
-                                <i class="mdi mdi-face"></i>
-                                <span class="hide-menu">Registro Clases</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="starter-kit.html" aria-expanded="false">
-                                <i class="mdi mdi-file"></i>
-                                <span class="hide-menu">Registro Horario</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+        <?php
+         //funcion donde se llama al menu superior del usuario
+          include("menu_docente.html");
+          ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -230,8 +185,9 @@
                         <div class="card">
                            <div class="card-body">
                                 
-                                <p>Bienvenido administrador, aqui podras realizar las diferentes gestiones de tu interes.<br>
-                                Recuerda llenar todos los campos de los formularios cuando sean necesarios.</p>
+                                <p>Bienvenido Docente, aqui podras realizar las diferentes gestiones de tu interes.<br>
+                                Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con<br>
+                                un administrador.</p>
                                 
                             </div> 
                     </div>

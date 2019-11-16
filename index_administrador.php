@@ -135,26 +135,10 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin5">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">Consultar Clase</span>
-                            </a>
-                        </li>
-                       
-
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+                <?php
+                 //funcion donde se llama al menu superior del usuario
+                  include("menu_administrador.html");
+                  ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -201,9 +185,8 @@
                         <div class="card">
                            <div class="card-body">
                                 
-                                <p>Bienvenido Docente, aqui podras realizar las diferentes gestiones de tu interes.<br>
-                                Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con<br>
-                                un administrador.</p>
+                                <p>Bienvenido administrador, aqui podras realizar las diferentes gestiones de tu interes.<br>
+                                Recuerda llenar todos los campos de los formularios cuando sean necesarios.</p>
                                 
                             </div> 
                     </div>

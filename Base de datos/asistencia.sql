@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 19:08:31
+-- Tiempo de generación: 16-11-2019 a las 19:15:44
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -120,6 +120,7 @@ CREATE TABLE `docente` (
   `documento` varchar(45) NOT NULL,
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del docente\n\n',
   `apellidos` varchar(45) NOT NULL,
+  `contrasena` varchar(150) NOT NULL,
   `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -127,12 +128,12 @@ CREATE TABLE `docente` (
 -- Volcado de datos para la tabla `docente`
 --
 
-INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `tipo_usuario_id_tipo_usuario`) VALUES
-(1, '12345', 'Luis Fernando', 'Alvarez', 2),
-(2, '67890', 'Sonia Helena', 'Godoy', 2),
-(3, '54321', 'Arvey', 'Barahona', 2),
-(4, '09876', 'Jhovanny', 'Gil', 2),
-(5, '10293', 'Edison', 'Jair', 2);
+INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `contrasena`, `tipo_usuario_id_tipo_usuario`) VALUES
+(1, '12345', 'Luis Fernando', 'Alvarez', '123', 2),
+(2, '67890', 'Sonia Helena', 'Godoy', '123', 2),
+(3, '54321', 'Arvey', 'Barahona', '123', 2),
+(4, '09876', 'Jhovanny', 'Gil', '123', 2),
+(5, '10293', 'Edison', 'Jair', '123', 2);
 
 -- --------------------------------------------------------
 

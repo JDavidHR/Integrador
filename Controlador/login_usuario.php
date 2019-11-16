@@ -9,7 +9,7 @@ if(isset($_POST['documento']) && !empty($_POST['documento'])){
     $mysql->conectar();//funcion llamada desde mysql.php
     
     //consulta donde hace la comparacion de lo que el usuario ingresa con lo almacenado en la base de datos
-    $usuarios = $mysql->efectuarConsulta("SELECT integrador.administrador.documento FROM integrador.administrador WHERE integrador.administrador.documento='".$documento."'");
+    $usuarios = $mysql->efectuarConsulta("SELECT integrador.usuario.documento FROM integrador.usuario WHERE integrador.usuario.documento='".$documento."'");
     
     $mysql->desconectar();//funcion llamada desde mysql.php
 }
@@ -28,7 +28,7 @@ if(isset($_POST['documento']) && !empty($_POST['documento'])){
  while ($resultado= mysqli_fetch_assoc($usuarios)){
         $documento= $resultado["documento"];
 
-        //$contrasena=  $resultado["contrasena"];
+       // $contrasena=  $resultado["contrasena"];
     
              $usuario->setdocumento($documento); //llama el metodo del documento usuarios
              
@@ -38,13 +38,13 @@ if(isset($_POST['documento']) && !empty($_POST['documento'])){
         $_SESSION['usuario'] = $usuario;
         $_SESSION['acceso'] = true; //variable logica
          
-        header("Location: ../index_administrador.html");//ubicacion si el usuario ingresado existe
+        header("Location: ../index_usuario.html");//ubicacion si el usuario ingresado existe
        
 
         
     }
     else{
-     header("Location: ../login_administrador.php"); //ubicacion si el usuario ingresado no existe
+     header("Location: ../login_usuario.php"); //ubicacion si el usuario ingresado no existe
 
     }
 

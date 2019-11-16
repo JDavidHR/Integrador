@@ -203,13 +203,13 @@
 										      <input placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_docente">
 										    </fieldset>
 										    <fieldset>
-										      <input placeholder="Nombres" type="email" tabindex="2" name="nombre_docente">
+										      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_docente">
 										    </fieldset>
 										    <fieldset>
-										      <input placeholder="Apellidos" type="tel" tabindex="3" name="apellido_docente">
+										      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente">
 										    </fieldset>				 	
 										 	<fieldset>
-										      <input placeholder="Contraseña" type="tel" tabindex="3" name="contrasena">
+										      <input placeholder="Contraseña" type="text" tabindex="4" name="contrasena">
 										    </fieldset>
 										    <fieldset>
 										      <select class="form-control " name="tipousuario" required>                                                

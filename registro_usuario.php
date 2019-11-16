@@ -202,20 +202,17 @@
 										    <h3>Registro del Usuario</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
 										    <fieldset>
-										      <input placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_docente">
+										      <input placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_usuario">
 										    </fieldset>
 										    <fieldset>
-										      <input placeholder="Nombres" type="email" tabindex="2" name="nombre_docente">
+										      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_usuario">
 										    </fieldset>
 										    <fieldset>
-										      <input placeholder="Apellidos" type="tel" tabindex="3" name="apellido_docente">
+										      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_usuario">
 										    </fieldset>		
                                             <fieldset>
-                                              <input placeholder="Semestre" type="tel" tabindex="4" name="Semestre">
+                                              <input placeholder="Semestre" type="text" tabindex="4" name="Semestre">
                                             </fieldset>  	
-										 	<fieldset>
-										      <input placeholder="Contraseña" type="tel" tabindex="5" name="contrasena">
-										    </fieldset>
 										    <fieldset>
 										      <select class="form-control " name="tipousuario" required>                                                
 								                <?php 

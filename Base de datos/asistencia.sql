@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2019 a las 20:07:08
+-- Tiempo de generación: 16-11-2019 a las 18:43:49
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -29,18 +29,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `administrador` (
-  `id` int(11) NOT NULL COMMENT 'Identificador del administrador',
+  `id_administrador` int(11) NOT NULL COMMENT 'Identificador del administrador',
   `documento` varchar(45) NOT NULL COMMENT 'Documento del administrador',
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del administrador',
   `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del administrador',
-  `tipo_usuario_id` int(11) NOT NULL COMMENT 'Id del tipo de usuario'
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`id`, `documento`, `nombres`, `apellidos`, `tipo_usuario_id`) VALUES
+INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apellidos`, `tipo_usuario_id_tipo_usuario`) VALUES
 (1, '1006318241', 'Natalia', 'Agudelo Valdes', 3),
 (2, '1006291396', 'Juan David', 'Hoyos Ramirez', 3);
 
@@ -51,7 +51,7 @@ INSERT INTO `administrador` (`id`, `documento`, `nombres`, `apellidos`, `tipo_us
 --
 
 CREATE TABLE `aula` (
-  `id` int(11) NOT NULL COMMENT 'Id del aula',
+  `id_aula` int(11) NOT NULL COMMENT 'Id del aula',
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre del aula'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,7 +59,7 @@ CREATE TABLE `aula` (
 -- Volcado de datos para la tabla `aula`
 --
 
-INSERT INTO `aula` (`id`, `nombre`) VALUES
+INSERT INTO `aula` (`id_aula`, `nombre`) VALUES
 (1, 'Laboratorio A'),
 (2, 'Laboratorio B'),
 (3, 'Laboratorio C'),
@@ -69,40 +69,117 @@ INSERT INTO `aula` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clases`
+-- Estructura de tabla para la tabla `carrera`
 --
 
-CREATE TABLE `clases` (
-  `id` int(11) NOT NULL COMMENT 'Id de la clase',
-  `horario_id` int(11) NOT NULL COMMENT 'Id del horario',
-  `dia` date NOT NULL COMMENT 'Dia de la clase'
+CREATE TABLE `carrera` (
+  `id_carrera` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `clases`
+-- Volcado de datos para la tabla `carrera`
 --
 
-INSERT INTO `clases` (`id`, `horario_id`, `dia`) VALUES
-(1, 1, '2019-11-12'),
-(2, 1, '2019-11-13');
+INSERT INTO `carrera` (`id_carrera`, `nombre`) VALUES
+(1, 'Tecnico pro. en programacion de aplicaciones info'),
+(2, 'Contaduria'),
+(3, 'Hoteleria'),
+(4, 'Farmaceutica'),
+(5, 'Administracion');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clases_has_usuario`
+-- Estructura de tabla para la tabla `clase`
 --
 
-CREATE TABLE `clases_has_usuario` (
-  `clases_id` int(11) NOT NULL COMMENT 'Id de la clase',
-  `usuario_id` int(11) NOT NULL COMMENT 'Id de los usuarios'
+CREATE TABLE `clase` (
+  `id_clase` int(11) NOT NULL COMMENT 'Id de la clase',
+  `dia` date NOT NULL COMMENT 'Dia de la clase',
+  `horario_id_horario` int(11) NOT NULL COMMENT 'Identificador del horario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `clases_has_usuario`
+-- Volcado de datos para la tabla `clase`
 --
 
-INSERT INTO `clases_has_usuario` (`clases_id`, `usuario_id`) VALUES
-(1, 1);
+INSERT INTO `clase` (`id_clase`, `dia`, `horario_id_horario`) VALUES
+(1, '2019-11-18', 1),
+(2, '2019-11-19', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `docente`
+--
+
+CREATE TABLE `docente` (
+  `id_docente` int(11) NOT NULL COMMENT 'Identificador del docente',
+  `documento` varchar(45) NOT NULL,
+  `nombres` varchar(45) NOT NULL COMMENT 'Nombres del docente\n\n',
+  `apellidos` varchar(45) NOT NULL,
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `docente`
+--
+
+INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `tipo_usuario_id_tipo_usuario`) VALUES
+(1, '12345', 'Luis Fernando', 'Alvarez', 2),
+(2, '67890', 'Sonia Helena', 'Godoy', 2),
+(3, '54321', 'Arvey', 'Barahona', 2),
+(4, '09876', 'Jhovanny', 'Gil', 2),
+(5, '10293', 'Edison', 'Jair', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `docente_has_clase`
+--
+
+CREATE TABLE `docente_has_clase` (
+  `docente_id_docente` int(11) NOT NULL,
+  `clase_id_clase` int(11) NOT NULL,
+  `estudiante_id_estudiante` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `docente_has_clase`
+--
+
+INSERT INTO `docente_has_clase` (`docente_id_docente`, `clase_id_clase`, `estudiante_id_estudiante`) VALUES
+(1, 1, 1),
+(1, 1, 2),
+(1, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estudiante`
+--
+
+CREATE TABLE `estudiante` (
+  `id_estudiante` int(11) NOT NULL COMMENT 'Identificador del estudiante',
+  `documento` varchar(45) NOT NULL COMMENT 'Documento del estudiante',
+  `nombres` varchar(45) NOT NULL COMMENT 'Nombres del estudiante',
+  `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del estudiante',
+  `jornada` varchar(45) NOT NULL COMMENT 'Jornada del estudiante',
+  `semestre` varchar(45) NOT NULL,
+  `horario_id_horario` int(11) NOT NULL COMMENT 'Identificador del horario',
+  `Carrera_id_carrera` int(11) NOT NULL,
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `horario_id_horario`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`) VALUES
+(1, '01', 'Juan Sebastian', 'Bayer', 'Diurna', 'IV', 1, 1, 1),
+(2, '02', 'Samuel', 'Fernandez Fernandez', 'Diurna', 'IV', 1, 1, 1),
+(3, '03', 'Sebastian', 'Ariza Rodriguez', 'Diurna', 'IV', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -111,64 +188,43 @@ INSERT INTO `clases_has_usuario` (`clases_id`, `usuario_id`) VALUES
 --
 
 CREATE TABLE `horario` (
-  `id` int(11) NOT NULL COMMENT 'Id del horario',
+  `id_horario` int(11) NOT NULL COMMENT 'Id del horario',
   `hora` time NOT NULL COMMENT 'Fecha del horario',
-  `aula_id` int(11) NOT NULL COMMENT 'Id del aula'
+  `materia_id_materia` int(11) NOT NULL,
+  `aula_id_aula` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `horario`
 --
 
-INSERT INTO `horario` (`id`, `hora`, `aula_id`) VALUES
-(1, '07:45:00', 1),
-(1, '07:45:00', 2),
-(1, '10:30:00', 3),
-(1, '10:30:00', 5);
+INSERT INTO `horario` (`id_horario`, `hora`, `materia_id_materia`, `aula_id_aula`) VALUES
+(1, '07:45:00', 1, 1),
+(1, '10:30:00', 2, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `horario_has_materias`
+-- Estructura de tabla para la tabla `materia`
 --
 
-CREATE TABLE `horario_has_materias` (
-  `horario_id` int(11) NOT NULL COMMENT 'Id del horario',
-  `materias_id` int(11) NOT NULL COMMENT 'Id de las materias'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `horario_has_materias`
---
-
-INSERT INTO `horario_has_materias` (`horario_id`, `materias_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `materias`
---
-
-CREATE TABLE `materias` (
-  `id` int(11) NOT NULL COMMENT 'Id de la materia',
+CREATE TABLE `materia` (
+  `id_materia` int(11) NOT NULL COMMENT 'Id de la materia',
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre de la materia'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `materias`
+-- Volcado de datos para la tabla `materia`
 --
 
-INSERT INTO `materias` (`id`, `nombre`) VALUES
+INSERT INTO `materia` (`id_materia`, `nombre`) VALUES
 (1, 'Matematicas discretas'),
-(2, 'Administracion de sistemas informaticos'),
+(2, 'Administracion de sistemas de informacion'),
 (3, 'Proyecto integrador tecnico'),
 (4, 'Electiva especifica Programacion web'),
-(5, 'Programacion orientada a objetos');
+(5, 'Programacion orientada a objetos'),
+(6, 'Base de datos II'),
+(7, 'Ingenieria de requerimientos');
 
 -- --------------------------------------------------------
 
@@ -177,7 +233,7 @@ INSERT INTO `materias` (`id`, `nombre`) VALUES
 --
 
 CREATE TABLE `tipo_usuario` (
-  `id` int(11) NOT NULL COMMENT 'Id del usuario',
+  `id_tipo_usuario` int(11) NOT NULL COMMENT 'Id del usuario',
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre (Administrador, Estudiante o Docente)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -185,33 +241,10 @@ CREATE TABLE `tipo_usuario` (
 -- Volcado de datos para la tabla `tipo_usuario`
 --
 
-INSERT INTO `tipo_usuario` (`id`, `nombre`) VALUES
+INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `nombre`) VALUES
 (1, 'Estudiante'),
 (2, 'Docente'),
 (3, 'Administrador');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
-CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `documento` varchar(45) NOT NULL COMMENT 'Documento del usuario',
-  `nombres` varchar(45) NOT NULL COMMENT 'Nombres del usuario',
-  `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del usuario',
-  `jornada` varchar(45) NOT NULL COMMENT 'Jornada del usuario',
-  `tipo_usuario_id` int(11) NOT NULL COMMENT 'Id del tipo de usuario',
-  `horario_id` int(11) NOT NULL COMMENT 'Id del horario'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id`, `documento`, `nombres`, `apellidos`, `jornada`, `tipo_usuario_id`, `horario_id`) VALUES
-(1, '1234', 'Juan', 'Perez', 'Diurna', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -221,72 +254,82 @@ INSERT INTO `usuario` (`id`, `documento`, `nombres`, `apellidos`, `jornada`, `ti
 -- Indices de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  ADD PRIMARY KEY (`id`,`tipo_usuario_id`),
+  ADD PRIMARY KEY (`id_administrador`,`tipo_usuario_id_tipo_usuario`),
   ADD UNIQUE KEY `documento_UNIQUE` (`documento`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`),
-  ADD KEY `fk_administrador_tipo_usuario1_idx` (`tipo_usuario_id`);
+  ADD UNIQUE KEY `id_UNIQUE` (`id_administrador`),
+  ADD KEY `fk_administrador_tipo_usuario1_idx` (`tipo_usuario_id_tipo_usuario`);
 
 --
 -- Indices de la tabla `aula`
 --
 ALTER TABLE `aula`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`);
+  ADD PRIMARY KEY (`id_aula`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id_aula`);
 
 --
--- Indices de la tabla `clases`
+-- Indices de la tabla `carrera`
 --
-ALTER TABLE `clases`
-  ADD PRIMARY KEY (`id`,`horario_id`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`),
-  ADD KEY `fk_clases_horario1_idx` (`horario_id`);
+ALTER TABLE `carrera`
+  ADD PRIMARY KEY (`id_carrera`),
+  ADD UNIQUE KEY `id_carrera_UNIQUE` (`id_carrera`);
 
 --
--- Indices de la tabla `clases_has_usuario`
+-- Indices de la tabla `clase`
 --
-ALTER TABLE `clases_has_usuario`
-  ADD PRIMARY KEY (`clases_id`,`usuario_id`),
-  ADD KEY `fk_clases_has_usuario_usuario1_idx` (`usuario_id`),
-  ADD KEY `fk_clases_has_usuario_clases1_idx` (`clases_id`);
+ALTER TABLE `clase`
+  ADD PRIMARY KEY (`id_clase`,`horario_id_horario`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id_clase`),
+  ADD KEY `fk_clase_horario1_idx` (`horario_id_horario`);
+
+--
+-- Indices de la tabla `docente`
+--
+ALTER TABLE `docente`
+  ADD PRIMARY KEY (`id_docente`,`tipo_usuario_id_tipo_usuario`),
+  ADD UNIQUE KEY `id_docente_UNIQUE` (`id_docente`),
+  ADD KEY `fk_docente_tipo_usuario1_idx` (`tipo_usuario_id_tipo_usuario`);
+
+--
+-- Indices de la tabla `docente_has_clase`
+--
+ALTER TABLE `docente_has_clase`
+  ADD PRIMARY KEY (`docente_id_docente`,`clase_id_clase`,`estudiante_id_estudiante`),
+  ADD KEY `fk_docente_has_clase_clase1_idx` (`clase_id_clase`),
+  ADD KEY `fk_docente_has_clase_docente1_idx` (`docente_id_docente`),
+  ADD KEY `fk_docente_has_clase_estudiante1_idx` (`estudiante_id_estudiante`);
+
+--
+-- Indices de la tabla `estudiante`
+--
+ALTER TABLE `estudiante`
+  ADD PRIMARY KEY (`id_estudiante`,`horario_id_horario`,`Carrera_id_carrera`,`tipo_usuario_id_tipo_usuario`),
+  ADD UNIQUE KEY `documento_UNIQUE` (`documento`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id_estudiante`),
+  ADD KEY `fk_estudiante_horario1_idx` (`horario_id_horario`),
+  ADD KEY `fk_estudiante_Carrera1_idx` (`Carrera_id_carrera`),
+  ADD KEY `fk_estudiante_tipo_usuario1_idx` (`tipo_usuario_id_tipo_usuario`);
 
 --
 -- Indices de la tabla `horario`
 --
 ALTER TABLE `horario`
-  ADD PRIMARY KEY (`id`,`aula_id`),
-  ADD KEY `fk_horario_aula1_idx` (`aula_id`);
+  ADD PRIMARY KEY (`id_horario`,`materia_id_materia`,`aula_id_aula`),
+  ADD KEY `fk_horario_materia1_idx` (`materia_id_materia`),
+  ADD KEY `fk_horario_aula1_idx` (`aula_id_aula`);
 
 --
--- Indices de la tabla `horario_has_materias`
+-- Indices de la tabla `materia`
 --
-ALTER TABLE `horario_has_materias`
-  ADD PRIMARY KEY (`horario_id`,`materias_id`),
-  ADD KEY `fk_horario_has_materias_materias1_idx` (`materias_id`),
-  ADD KEY `fk_horario_has_materias_horario1_idx` (`horario_id`);
-
---
--- Indices de la tabla `materias`
---
-ALTER TABLE `materias`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`);
+ALTER TABLE `materia`
+  ADD PRIMARY KEY (`id_materia`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id_materia`);
 
 --
 -- Indices de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`);
-
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`,`tipo_usuario_id`,`horario_id`),
-  ADD UNIQUE KEY `documento_UNIQUE` (`documento`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`),
-  ADD KEY `fk_usuario_tipo_usuario1_idx` (`tipo_usuario_id`),
-  ADD KEY `fk_usuario_horario1_idx` (`horario_id`);
+  ADD PRIMARY KEY (`id_tipo_usuario`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id_tipo_usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -296,37 +339,49 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del administrador', AUTO_INCREMENT=4;
+  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del administrador', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula', AUTO_INCREMENT=6;
+  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula', AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `clases`
+-- AUTO_INCREMENT de la tabla `carrera`
 --
-ALTER TABLE `clases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=3;
+ALTER TABLE `carrera`
+  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `materias`
+-- AUTO_INCREMENT de la tabla `clase`
 --
-ALTER TABLE `materias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la materia', AUTO_INCREMENT=6;
+ALTER TABLE `clase`
+  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `docente`
+--
+ALTER TABLE `docente`
+  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del docente', AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `estudiante`
+--
+ALTER TABLE `estudiante`
+  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `materia`
+--
+ALTER TABLE `materia`
+  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la materia', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del usuario', AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tipo_usuario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del usuario', AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -336,40 +391,42 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  ADD CONSTRAINT `fk_administrador_tipo_usuario1` FOREIGN KEY (`tipo_usuario_id`) REFERENCES `tipo_usuario` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_administrador_tipo_usuario1` FOREIGN KEY (`tipo_usuario_id_tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `clases`
+-- Filtros para la tabla `clase`
 --
-ALTER TABLE `clases`
-  ADD CONSTRAINT `fk_clases_horario1` FOREIGN KEY (`horario_id`) REFERENCES `horario` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `clase`
+  ADD CONSTRAINT `fk_clase_horario1` FOREIGN KEY (`horario_id_horario`) REFERENCES `horario` (`id_horario`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `clases_has_usuario`
+-- Filtros para la tabla `docente`
 --
-ALTER TABLE `clases_has_usuario`
-  ADD CONSTRAINT `fk_clases_has_usuario_clases1` FOREIGN KEY (`clases_id`) REFERENCES `clases` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_clases_has_usuario_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `docente`
+  ADD CONSTRAINT `fk_docente_tipo_usuario1` FOREIGN KEY (`tipo_usuario_id_tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `docente_has_clase`
+--
+ALTER TABLE `docente_has_clase`
+  ADD CONSTRAINT `fk_docente_has_clase_clase1` FOREIGN KEY (`clase_id_clase`) REFERENCES `clase` (`id_clase`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_docente_has_clase_docente1` FOREIGN KEY (`docente_id_docente`) REFERENCES `docente` (`id_docente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_docente_has_clase_estudiante1` FOREIGN KEY (`estudiante_id_estudiante`) REFERENCES `estudiante` (`id_estudiante`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `estudiante`
+--
+ALTER TABLE `estudiante`
+  ADD CONSTRAINT `fk_estudiante_Carrera1` FOREIGN KEY (`Carrera_id_carrera`) REFERENCES `carrera` (`id_carrera`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_estudiante_horario1` FOREIGN KEY (`horario_id_horario`) REFERENCES `horario` (`id_horario`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_estudiante_tipo_usuario1` FOREIGN KEY (`tipo_usuario_id_tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `horario`
 --
 ALTER TABLE `horario`
-  ADD CONSTRAINT `fk_horario_aula1` FOREIGN KEY (`aula_id`) REFERENCES `aula` (`id`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `horario_has_materias`
---
-ALTER TABLE `horario_has_materias`
-  ADD CONSTRAINT `fk_horario_has_materias_horario1` FOREIGN KEY (`horario_id`) REFERENCES `horario` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_horario_has_materias_materias1` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`id`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_usuario_horario1` FOREIGN KEY (`horario_id`) REFERENCES `horario` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_usuario_tipo_usuario1` FOREIGN KEY (`tipo_usuario_id`) REFERENCES `tipo_usuario` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_horario_aula1` FOREIGN KEY (`aula_id_aula`) REFERENCES `aula` (`id_aula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_horario_materia1` FOREIGN KEY (`materia_id_materia`) REFERENCES `materia` (`id_materia`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

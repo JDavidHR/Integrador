@@ -1,13 +1,13 @@
 <?php
 //condicion donde se rectifica que los campos no esten vacios y que esten definidos
-if(isset($_POST['submit']) && !empty($_POST['hora']) && !empty($_POST['aula'])){
+if(isset($_POST['submit']) && !empty($_POST['hora']) && !empty($_POST['aula']) && !empty($_POST['materia'])){
 
         require_once '../modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
         $fecha=$_POST["hora"];
+        $fecha = date("h:i:s a");
         
-        
-        $materia = date('materia');
+        $materia =$_POST["materia"];
         $aula =$_POST["aula"];
 
         $mysql = new MySQL;//nuevo mysql

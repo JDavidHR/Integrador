@@ -9,11 +9,11 @@ if(isset($_POST['submit']) && !empty($_POST['nombre_aula'])){
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        $sql=$mysql->efectuarConsulta("insert into integrador.aula(nombre) VALUES ('".$aula."')");
+        $sql=$mysql->efectuarConsulta("insert into asistencia.aula(nombre) VALUES ('".$aula."')");
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
-            echo"<script type=\"text/javascript\">alert('Se registro correctamente'); window.location='../index_administrador.html';</script>";
+            echo"<script type=\"text/javascript\">alert('Se registro correctamente'); window.location='../index_administrador.php';</script>";
 
         }else{
             //mensaje de salida en caso de que la consulta falle

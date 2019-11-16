@@ -5,17 +5,19 @@ if(isset($_POST['submit']) && !empty($_POST['hora']) && !empty($_POST['aula'])){
         require_once '../modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
         $fecha=$_POST["hora"];
-        $fecha = date('HH:MM');
-        $aula = date('aula');
+        
+        
+        $materia = date('materia');
+        $aula =$_POST["aula"];
 
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        $sql=$mysql->efectuarConsulta("insert into integrador.horario(hora,aula_id) VALUES ('".$fecha."','".$aula."')");
+        $sql=$mysql->efectuarConsulta("insert into asistencia.horario(CURTIME(hora),materia_id_materia,aula_id_aula) VALUES ('".$fecha."','".$materia."','".$aula."')");
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
-            echo"<script type=\"text/javascript\">alert('Se registro correctamente'); window.location='../index_administrador.html';</script>";
+            echo"<script type=\"text/javascript\">alert('Se registro correctamente'); window.location='../index_administrador.php';</script>";
 
         }else{
             //mensaje de salida en caso de que la consulta falle

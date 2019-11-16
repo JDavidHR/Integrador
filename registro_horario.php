@@ -220,7 +220,7 @@
                                             </fieldset>
                                                 <br>
 										    <fieldset>
-										      <select class="form-control " name="tipousuario" required>                                                
+										      <select class="form-control " name="aula" required>                                                
 								                <?php 
 								                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
 								                  while ($resultado= mysqli_fetch_assoc($seleccionaula)){                         

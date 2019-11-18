@@ -32,21 +32,30 @@
 </head>
 
 <body>
-	  <?php 
+	<?php 
     session_start();
     if(!isset($_SESSION['tipousuario'])){
     //llamado del archivo mysql
     require_once 'Modelo/MySQL.php';
     //creacion de nueva "consulta"
-    $mysql = new MySQL;
-    //se conecta a la base de datos
-    $mysql->conectar();    
-    //respectiva consulta para la seleccion de usuario  
-     $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");  
-    //se desconecta de la base de datos
-    $mysql->desconectar(); 
-    }   
-    ?>
+    $mysql = new MySQL; //se crea un nuevo musql
+
+    $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
+
+//declaracion de variables metodo post
+$id_clase = $_POST['clase'];
+$mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.clase.dia, asistencia.clase.horario_id_horario from clase WHERE asistencia.clase.id_clase = ".$id."");
+$seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario"); 
+//se inicia el recorrido para mostrar los datos de la BD
+ while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+//declaracion de variables
+$dia = $valores1['dia'];
+$horario = $valores1['horario_id_horario'];
+
+    }
+}
+$mysql->desconectar();//funcion llamada desde mysql.php
+?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -153,11 +162,16 @@
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_clase.php" method="post">
-										    <h3>Registro de la Clase</h3>
+										<form id="contact" action="Controlador/update_clase.php" method="post">
+										    <h3>Actualizar Clase</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
+                                            <fieldset>
+                                                <label>ID Clase: </label>
+                                              <input placeholder="ID clase"  type="text" tabindex="1"  autofocus name="id" value="<?php echo $id_clase ?>">
+                                            </fieldset>
 										    <fieldset>
-										      <input placeholder="Dia" type="date" tabindex="1"  autofocus name="dia" class="form-control">
+                                                <label>Día:</label>
+										      <input placeholder="Dia" type="date" tabindex="1"  autofocus name="dia" class="form-control" value="<?php echo $dia ?>">
 										    </fieldset>
 										    
                                             <fieldset>
@@ -179,13 +193,11 @@
                                             
 										    <br>
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
                                             </fieldset>
 
                                         </form>
-                                        <fieldset>
-                                              <center><a href="update_clase.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Clase</button></a></center>
-                                            </fieldset>
+                                        
 								</div>
                             </div> 
                     </div>

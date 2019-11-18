@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Registro Clase</title>
+    <title>Update Clase</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -42,7 +42,7 @@
     //se conecta a la base de datos
     $mysql->conectar();    
     //respectiva consulta para la seleccion de usuario  
-     $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");  
+     $seleccionclase =$mysql->efectuarConsulta("SELECT asistencia.clase.id_clase from clase");  
     //se desconecta de la base de datos
     $mysql->desconectar(); 
     }   
@@ -153,39 +153,32 @@
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_clase.php" method="post">
-										    <h3>Registro de la Clase</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-										    <fieldset>
-										      <input placeholder="Dia" type="date" tabindex="1"  autofocus name="dia" class="form-control">
-										    </fieldset>
-										    
+										<form id="contact" action="update_clase2.php" method="post">
+										    <h3>Actualizar Clase</h3>
+										    <h4>Selecciona el ID de la clase a modificar</h4>
+
                                             <fieldset>
-                                            <label>Horario: </label>
-                                            <select name="horario" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
+                                              <select class="form-control " name="clase" required>                                                
+                                                <?php 
+                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                  while ($resultado= mysqli_fetch_assoc($seleccionclase)){                         
+                                                ?> 
+                                                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                    <option value="<?php echo $resultado['id_clase']?>"><?php echo $resultado['id_clase']?></option>                                                
                                                 <?php
-                                                  //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                  while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                                                    ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']?></option>';
-                                                    <?php
                                                   }
                                                 ?>
-                                                
-                                            </select>
-                                            </fieldset>
+                                              </select>
+                                            <br>
+                                            <fieldset>
                                             
 										    <br>
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Selecionar</button>
                                             </fieldset>
 
                                         </form>
-                                        <fieldset>
-                                              <center><a href="update_clase.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Clase</button></a></center>
-                                            </fieldset>
+                                        
 								</div>
                             </div> 
                     </div>

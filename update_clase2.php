@@ -44,7 +44,7 @@
 
 //declaracion de variables metodo post
 $id_clase = $_POST['clase'];
-$mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.clase.dia, asistencia.clase.horario_id_horario from clase WHERE asistencia.clase.id_clase = ".$id."");
+$mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.clase.dia, asistencia.clase.horario_id_horario from clase WHERE asistencia.clase.id_clase = ".$id_clase."");
 $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario"); 
 //se inicia el recorrido para mostrar los datos de la BD
  while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
@@ -171,7 +171,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                                             </fieldset>
 										    <fieldset>
                                                 <label>Día:</label>
-										      <input placeholder="Dia" type="date" tabindex="1"  autofocus name="dia" class="form-control" value="<?php echo $dia ?>">
+										      <input placeholder="Dia" type="date" tabindex="2"  autofocus name="dia" class="form-control" value="<?php echo $dia ?>">
 										    </fieldset>
 										    
                                             <fieldset>

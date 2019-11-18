@@ -189,9 +189,13 @@
                                             </fieldset>
 										    <br>
 										    <fieldset>
-										      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Registrar</button>
-										    </fieldset>
-										</form>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                            </fieldset>
+
+                                        </form>
+                                        <fieldset>
+                                              <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Aula</button></a></center>
+                                            </fieldset>
 								</div>
                             </div> 
                     </div>

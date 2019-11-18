@@ -202,7 +202,7 @@
 										    <h4>Recuerda llenar todos los campos</h4>
 										    <fieldset>
                                                 <label>Hora Estimada: </label><br>
-                                              <input placeholder="hora" type="time" tabindex="1"  autofocus name="hora" class="form-control">
+                                              <input placeholder="hora" type="time" tabindex="1"  autofocus name="hora" class="form-control" min="1:00:00" max="24:00:00" step="1">
                                             </fieldset>
 										    <br>
                                             <fieldset>

@@ -8,5 +8,5 @@
     session_destroy();
     
     //Dirigirse a la pagina principal
-    header("Location: ../index.php"); 
+    header("Location: ../login.php"); 
     ?>

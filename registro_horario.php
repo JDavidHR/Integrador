@@ -43,7 +43,8 @@
     $mysql->conectar();    
     //respectiva consulta para la seleccion de usuario
     $seleccionaula =$mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");  
-    $seleccionmateria =$mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia");     
+    $seleccionmateria =$mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia"); 
+    $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");    
     //se desconecta de la base de datos
     $mysql->desconectar(); 
     }   
@@ -202,7 +203,7 @@
 										    <h4>Recuerda llenar todos los campos</h4>
 										    <fieldset>
                                                 <label>Hora Estimada: </label><br>
-                                              <input placeholder="hora" type="time" tabindex="1"  autofocus name="hora" class="form-control" min="1:00:00" max="24:00:00" step="1">
+                                              <input placeholder="hora" type="time" tabindex="1"  autofocus name="hora" class="form-control" min="07:00:00" max="18:00:00" step="1">
                                             </fieldset>
 										    <br>
                                             <fieldset>
@@ -226,13 +227,30 @@
 								                  while ($resultado= mysqli_fetch_assoc($seleccionaula)){                         
 								                ?> 
 								                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-								                    <option value="<?php echo $resultado['id_tipo_usuario']?>"><?php echo $resultado['nombre']?></option>                                                
+								                    <option value="<?php echo $resultado['id_aula']?>"><?php echo $resultado['nombre']?></option>                                                
 								                <?php
 								                  }
 								                ?>
 								              </select>
 										    </fieldset>
 										    <br>
+                                            <fieldset>
+                                            <label>Horario: </label>
+                                            <select name="horario" class="form-control">
+                                                <option value="0" disabled="">Seleccione:</option>
+                                                <?php
+                                                  //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                  while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
+                                                    ?>
+                                                    <!--se traen los datos a mostrar en el select-->
+                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']?></option>';
+                                                    <?php
+                                                  }
+                                                ?>
+                                                
+                                            </select>
+                                            </fieldset>
+                                            <br>
 										    <fieldset>
 										      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Registrar</button>
 										    </fieldset>

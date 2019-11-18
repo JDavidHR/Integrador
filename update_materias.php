@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Registro Materias</title>
+    <title>Update Materias</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,6 +32,20 @@
 </head>
 
 <body>
+          <?php 
+    session_start();
+    if(!isset($_SESSION['tipousuario'])){
+    //llamado del archivo mysql
+    require_once 'Modelo/MySQL.php';
+    //creacion de nueva "consulta"
+    $mysql = new MySQL;
+    //se conecta a la base de datos
+    $mysql->conectar();    
+    $seleccionmateria =$mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia");  
+    //se desconecta de la base de datos
+    $mysql->desconectar(); 
+    }   
+    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -138,21 +152,29 @@
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_materia.php" method="post">
-										    <h3>Registro de la Materia</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-										    <fieldset>
-                                              <input placeholder="Nombre de la materia" type="text" tabindex="1"  autofocus name="nombre_materia">
-                                            </fieldset>
+										<form id="contact" action="update_materias2.php" method="post">
+										    <h3>Actualizar Materia</h3>
+										    <h4>Seleciona la materia a actualizar</h4>
+										    <br>
+                                            <fieldset>
+                                              <select class="form-control " name="materia" required>                                                
+                                                <?php 
+                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                  while ($resultado= mysqli_fetch_assoc($seleccionmateria)){                         
+                                                ?> 
+                                                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                    <option value="<?php echo $resultado['id_materia']?>"><?php echo $resultado['nombre']?></option>                                                
+                                                <?php
+                                                  }
+                                                ?>
+                                              </select>
 										    <br>
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
                                             </fieldset>
 
                                         </form>
-                                        <fieldset>
-                                              <center><a href="update_materias.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Materia</button></a></center>
-                                            </fieldset>
+                                        
 								</div>
                             </div> 
                     </div>

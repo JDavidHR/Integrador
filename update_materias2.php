@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Registro Materias</title>
+    <title>Update Materias</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,6 +32,28 @@
 </head>
 
 <body>
+<?php 
+    session_start();
+    if(!isset($_SESSION['tipousuario'])){
+    //llamado del archivo mysql
+    require_once 'Modelo/MySQL.php';
+    //creacion de nueva "consulta"
+    $mysql = new MySQL; //se crea un nuevo musql
+
+    $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
+
+//declaracion de variables metodo post
+$id = $_POST['materia'];
+$mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.materia.nombre from materia WHERE asistencia.materia.id_materia = ".$id."");
+//se inicia el recorrido para mostrar los datos de la BD
+ while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+//declaracion de variables
+$materia = $valores1['nombre'];
+
+    }
+}
+$mysql->desconectar();//funcion llamada desde mysql.php
+?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -138,21 +160,24 @@
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_materia.php" method="post">
-										    <h3>Registro de la Materia</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-										    <fieldset>
-                                              <input placeholder="Nombre de la materia" type="text" tabindex="1"  autofocus name="nombre_materia">
-                                            </fieldset>
+										<form id="contact" action="Controlador/update_materia.php" method="post">
+										    <h3>Actualizar Materia</h3>
+										    <h4>Seleciona la materia a actualizar</h4>
 										    <br>
-										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                            <fieldset>
+                                              <input placeholder="ID materia" type="text" tabindex="1"  autofocus name="id" value="<?php echo $id ?>">
+                                            </fieldset>
+                                            <br>
+                                            <fieldset>
+                                              <input placeholder="Nombre de la materia" type="text" tabindex="1"  autofocus name="nombre_materia" value="<?php echo $materia ?>">
+                                            </fieldset>
+
+                                            <fieldset>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
                                             </fieldset>
 
                                         </form>
-                                        <fieldset>
-                                              <center><a href="update_materias.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Materia</button></a></center>
-                                            </fieldset>
+                                        
 								</div>
                             </div> 
                     </div>

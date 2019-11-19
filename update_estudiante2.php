@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Update Clase</title>
+    <title>Update Estudiante</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -41,12 +41,30 @@
     $mysql = new MySQL;
     //se conecta a la base de datos
     $mysql->conectar();    
-    //respectiva consulta para la seleccion de usuario  
-     $seleccionEstudiante =$mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante");  
-    //se desconecta de la base de datos
-    $mysql->desconectar(); 
-    }   
-    ?>
+    $id_usuario = $_POST['usuario'];
+    //respectiva consulta para la seleccion de usuario
+
+    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.estudiante.documento,asistencia.estudiante.nombres,asistencia.estudiante.apellidos,asistencia.estudiante.jornada,asistencia.estudiante.semestre,asistencia.estudiante.horario_id_horario,asistencia.estudiante.Carrera_id_carrera,asistencia.estudiante.tipo_usuario_id_tipo_usuario from estudiante WHERE asistencia.estudiante.id_estudiante = ".$id_usuario."");
+
+
+    $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 1");   
+     $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");  
+     $seleccioncarrera = $mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera, asistencia.carrera.nombre from carrera"); 
+   while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+//declaracion de variables
+$doc = $valores1['documento'];
+$nombre = $valores1['nombres'];
+$apellido = $valores1['apellidos'];
+$jornada = $valores1['jornada'];
+$semestre = $valores1['semestre'];
+$horario = $valores1['horario_id_horario'];
+$carrera = $valores1['Carrera_id_carrera'];
+$tipo = $valores1['tipo_usuario_id_tipo_usuario'];
+
+    }
+}
+$mysql->desconectar();//funcion llamada desde mysql.php
+?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -153,31 +171,84 @@
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="update_estudiante2.php" method="post">
-										    <h3>Editar estudiante</h3>
-										    <h4>Selecciona el estudiante a modificar</h4>
-
+										<form id="contact" action="Controlador/update_estudiante.php?id=<?php echo $id_usuario; ?>" method="post">
+										    <h3>Update del Usuario</h3>
+										    <h4>Recuerda llenar todos los campos</h4>
                                             <fieldset>
-                                              <select class="form-control " name="usuario" required>                                                
-                                                <?php 
-                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                                                  while ($resultado= mysqli_fetch_assoc($seleccionEstudiante)){                         
-                                                ?> 
-                                                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                    <option value="<?php echo $resultado['id_estudiante']?>"><?php echo $resultado['nombres']?></option>                                                
+                                                <label>ID Usuario</label>
+                                              <input placeholder="ID usuario" type="text" tabindex="1"  disabled="" name="id" value="<?php echo $id_usuario ?>">
+                                            </fieldset>
+										    <fieldset>
+                                                <label>Documento</label>
+										      <input placeholder="Documento" type="text" tabindex="1"   name="documento_usuario" value="<?php echo $doc ?>">
+										    </fieldset>
+										    <fieldset>
+										      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_usuario" value="<?php echo $nombre ?>">
+										    </fieldset>
+										    <fieldset>
+										      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_usuario" value="<?php echo $apellido ?>">
+										    </fieldset>		
+                                            <fieldset>
+                                                <label>Semestre</label>
+                                              <input placeholder="Semestre" type="text" tabindex="4" name="Semestre" value="<?php echo $semestre ?>">
+                                            </fieldset>  	
+										    <fieldset>
+										      <select class="form-control " name="tipousuario" required>                                                
+								                <?php 
+								                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+								                  while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
+								                ?> 
+								                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+								                    <option value="<?php echo $resultado['id_tipo_usuario']?>"><?php echo $resultado['nombre']?></option>                                                
+								                <?php
+								                  }
+								                ?>
+								              </select>
+										    </fieldset>
+                                            <fieldset>
+                                            <label>Horario: </label>
+                                            <select name="horario" class="form-control">
+                                                <option value="0" disabled="">Seleccione:</option>
                                                 <?php
+                                                  //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                  while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
+                                                    ?>
+                                                    <!--se traen los datos a mostrar en el select-->
+                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']?></option>';
+                                                    <?php
                                                   }
                                                 ?>
-                                              </select>
-                                            <br>
+                                                
+                                            </select>
+                                            </fieldset>
                                             <fieldset>
-                                            
+                                                <label>Carrera: </label>
+                                            <select name="carrera" class="form-control">
+                                                <option value="0" disabled="">Seleccione:</option>
+                                                <?php
+                                                  //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                  while ($valores1 = mysqli_fetch_assoc($seleccioncarrera)) {
+                                                    ?>
+                                                    <!--se traen los datos a mostrar en el select-->
+                                                    <option value="<?php echo $valores1['id_carrera']?>"><?php echo $valores1['nombre']?></option>';
+                                                    <?php
+                                                  }
+                                                ?>
+                                                
+                                            </select>
+                                            </fieldset>
+                                            <fieldset>
+                                                <label>Jornada: </label><br>
+                                                <input type="radio" name="radiobutton" placeholder="diurna" value="Diurna" id="diurna">Diurna
+                                                <input type="radio" name="radiobutton" placeholder="nocturna" value="Nocturna" id="nocturna">Nocturna
+                                                <input type="radio" name="radiobutton" placeholder="sabatina" value="Sabatina" id="sabatina">Sabatina
+                                            </fieldset> 
 										    <br>
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Selecionar</button>
-                                            </fieldset>
+										      <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
+										    </fieldset>
 
-                                        </form>
+										</form>
                                         
 								</div>
                             </div> 

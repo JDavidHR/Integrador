@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Registro Docente</title>
+    <title>Update Docente</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -40,13 +40,25 @@
     //creacion de nueva "consulta"
     $mysql = new MySQL;
     //se conecta a la base de datos
-    $mysql->conectar();    
-    //respectiva consulta para la seleccion de usuario
-    $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 2");     
-    //se desconecta de la base de datos
-    $mysql->desconectar(); 
-    }   
-    ?>
+    $mysql->conectar();  
+    $id_docente = $_POST['docente'];  
+
+    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.docente.documento,asistencia.docente.nombres,asistencia.docente.apellidos,asistencia.docente.contrasena,asistencia.docente.tipo_usuario_id_tipo_usuario from docente WHERE asistencia.docente.id_docente = ".$id_docente."");
+
+    $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 2");
+//se inicia el recorrido para mostrar los datos de la BD
+ while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+//declaracion de variables
+$doc = $valores1['documento'];
+$nombre = $valores1['nombres'];
+$apellido = $valores1['apellidos'];
+$pass = $valores1['contrasena'];
+$tipo = $valores1['tipo_usuario_id_tipo_usuario'];
+
+    }
+}
+$mysql->desconectar();//funcion llamada desde mysql.php
+?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -153,23 +165,30 @@
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_docente.php" method="post">
+										<form id="contact" action="Controlador/update_docente.php?id=<?php echo $id_docente; ?>" method="post">
 										    <h3>Registro del Docente</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
+                                            <fieldset>
+                                                <label>ID Docente</label>
+                                              <input placeholder="ID docente" type="text" tabindex="1"  disabled="" name="id" value="<?php echo $id_docente ?>">
+                                            </fieldset>
 										    <fieldset>
-										      <input placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_docente">
+                                                <label>Documento</label>
+										      <input placeholder="Documento" type="text" tabindex="1"   name="documento_docente" value="<?php echo $doc ?>">
 										    </fieldset>
 										    <fieldset>
-										      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_docente">
+										      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_docente" value="<?php echo $nombre ?>">
 										    </fieldset>
 										    <fieldset>
-										      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente">
+										      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente" value="<?php echo $apellido ?>">
 										    </fieldset>				 	
 										 	<fieldset>
-										      <input placeholder="Contraseña" type="text" tabindex="4" name="contrasena">
+                                                <label>Contraseña</label>
+										      <input placeholder="Contraseña" type="text" tabindex="4" name="contrasena" value="<?php echo $pass ?>">
 										    </fieldset>
 										    <fieldset>
-										      <select class="form-control " name="tipousuario" required>                                                
+										      <select class="form-control " name="tipousuario" required>
+                                              <option value="0" disabled="">Seleccione:</option>                                                
 								                <?php 
 								                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
 								                  while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
@@ -183,13 +202,11 @@
 										    </fieldset>
 										    <br>
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                              <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
                                             </fieldset>
 
                                         </form>
-                                        <fieldset>
-                                              <center><a href="update_docente.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Docente</button></a></center>
-                                            </fieldset>
+                                        
 								</div>
                             </div> 
                     </div>

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Registro Horario</title>
+    <title>Update Horario</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -40,15 +40,30 @@
     //creacion de nueva "consulta"
     $mysql = new MySQL;
     //se conecta a la base de datos
-    $mysql->conectar();    
+    $mysql->conectar(); 
+
+    $id_usuario = $_POST['horario'];   
+
+
+    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.horario.hora,asistencia.horario.materia_id_materia,asistencia.horario.aula_id_aula from horario WHERE asistencia.horario.id_horario = ".$id_usuario."");
+
+
     //respectiva consulta para la seleccion de usuario
     $seleccionaula =$mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");  
     $seleccionmateria =$mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia"); 
     $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");    
     //se desconecta de la base de datos
-    $mysql->desconectar(); 
-    }   
-    ?>
+    while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+//declaracion de variables
+$hora = $valores1['hora'];
+$materia = $valores1['materia_id_materia'];
+$aula = $valores1['aula_id_aula'];
+
+
+    }
+}
+$mysql->desconectar();//funcion llamada desde mysql.php
+?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -155,9 +170,15 @@
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_horario.php" method="post">
+										<form id="contact" action="Controlador/update_horario.php?id=<?php echo $id_usuario; ?>" method="post">
 										    <h3>Registro del Horario</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
+                                            <br>
+                                             <fieldset>
+                                                <label>ID Horario</label>
+                                              <input placeholder="ID horario" type="text" tabindex="1"  disabled="" name="id" value="<?php echo $id_usuario ?>">
+                                            </fieldset>
+                                            <br>
 										    <fieldset>
                                                 <label>Hora Estimada: </label><br>
                                               <input placeholder="hora" type="time" tabindex="1"  autofocus name="hora" class="form-control" min="07:00:00" max="18:00:00" step="1">
@@ -191,31 +212,14 @@
 								              </select>
 										    </fieldset>
 										    <br>
-                                            <fieldset>
-                                            <label>Horario: </label>
-                                            <select name="horario" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
-                                                <?php
-                                                  //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                  while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                                                    ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']?></option>';
-                                                    <?php
-                                                  }
-                                                ?>
-                                                
-                                            </select>
-                                            </fieldset>
-                                            <br>
+                                            
+                                            
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                              <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
                                             </fieldset>
 
                                         </form>
-                                        <fieldset>
-                                              <center><a href="update_horario.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Horario</button></a></center>
-                                            </fieldset>
+                                        
 										
 								</div>
                             </div> 

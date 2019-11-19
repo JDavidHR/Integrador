@@ -54,10 +54,6 @@
             <div class="form-check">
               <button type="submit" class="btn btn-login float-left" name="sesion">Iniciar sesión</button>
             </div>
-
-            <div class="form-check">
-              <a href="index.php" class="btn btn-login float-right">Cancelar</a>
-            </div>
           </form>   
         </div>
         <div class="col-md-8 banner-sec">     

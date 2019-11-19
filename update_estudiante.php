@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Registro Estudiante</title>
+    <title>Update Clase</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -41,10 +41,8 @@
     $mysql = new MySQL;
     //se conecta a la base de datos
     $mysql->conectar();    
-    //respectiva consulta para la seleccion de usuario
-    $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 1");   
-     $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");  
-     $seleccioncarrera = $mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera, asistencia.carrera.nombre from carrera"); 
+    //respectiva consulta para la seleccion de usuario  
+     $seleccionEstudiante =$mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante");  
     //se desconecta de la base de datos
     $mysql->desconectar(); 
     }   
@@ -155,81 +153,32 @@
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_usuario.php" method="post">
-										    <h3>Registro del Usuario</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-										    <fieldset>
-										      <input placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_usuario">
-										    </fieldset>
-										    <fieldset>
-										      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_usuario">
-										    </fieldset>
-										    <fieldset>
-										      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_usuario">
-										    </fieldset>		
+										<form id="contact" action="update_clase2.php" method="post">
+										    <h3>Editar estudiante</h3>
+										    <h4>Selecciona el estudiante a modificar</h4>
+
                                             <fieldset>
-                                              <input placeholder="Semestre" type="text" tabindex="4" name="Semestre">
-                                            </fieldset>  	
-										    <fieldset>
-										      <select class="form-control " name="tipousuario" required>                                                
-								                <?php 
-								                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-								                  while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
-								                ?> 
-								                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-								                    <option value="<?php echo $resultado['id_tipo_usuario']?>"><?php echo $resultado['nombre']?></option>                                                
-								                <?php
-								                  }
-								                ?>
-								              </select>
-										    </fieldset>
-                                            <fieldset>
-                                            <label>Horario: </label>
-                                            <select name="horario" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
+                                              <select class="form-control " name="clase" required>                                                
+                                                <?php 
+                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                  while ($resultado= mysqli_fetch_assoc($seleccionEstudiante)){                         
+                                                ?> 
+                                                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                    <option value="<?php echo $resultado['id_estudiante']?>"><?php echo $resultado['nombres']?></option>                                                
                                                 <?php
-                                                  //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                  while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                                                    ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']?></option>';
-                                                    <?php
                                                   }
                                                 ?>
-                                                
-                                            </select>
-                                            </fieldset>
+                                              </select>
+                                            <br>
                                             <fieldset>
-                                                <label>Carrera: </label>
-                                            <select name="carrera" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
-                                                <?php
-                                                  //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                  while ($valores1 = mysqli_fetch_assoc($seleccioncarrera)) {
-                                                    ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_carrera']?>"><?php echo $valores1['nombre']?></option>';
-                                                    <?php
-                                                  }
-                                                ?>
-                                                
-                                            </select>
-                                            </fieldset>
-                                            <fieldset>
-                                                <label>Jornada: </label><br>
-                                                <input type="radio" name="radiobutton" placeholder="diurna" value="Diurna" id="diurna">Diurna
-                                                <input type="radio" name="radiobutton" placeholder="nocturna" value="Nocturna" id="nocturna">Nocturna
-                                                <input type="radio" name="radiobutton" placeholder="sabatina" value="Sabatina" id="sabatina">Sabatina
-                                            </fieldset> 
+                                            
 										    <br>
 										    <fieldset>
-										      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
-										    </fieldset>
-
-										</form>
-                                        <fieldset>
-                                              <center><a href="update_estudiante.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Usuario</button></a></center>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Selecionar</button>
                                             </fieldset>
+
+                                        </form>
+                                        
 								</div>
                             </div> 
                     </div>

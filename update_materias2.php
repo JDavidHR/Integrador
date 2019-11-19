@@ -33,7 +33,7 @@
 
 <body>
 <?php 
-    session_start();
+    //session_start();
     if(!isset($_SESSION['tipousuario'])){
     //llamado del archivo mysql
     require_once 'Modelo/MySQL.php';

@@ -33,7 +33,7 @@
 
 <body>
 	  <?php 
-    session_start();
+    //session_start();
     if(!isset($_SESSION['tipousuario'])){
     //llamado del archivo mysql
     require_once 'Modelo/MySQL.php';
@@ -42,7 +42,7 @@
     //se conecta a la base de datos
     $mysql->conectar();    
     //respectiva consulta para la seleccion de usuario
-   $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");    
+   $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario");    
     //se desconecta de la base de datos
     $mysql->desconectar(); 
     }   
@@ -156,7 +156,6 @@
 										<form id="contact" action="update_horario2.php" method="post">
 										    <h3>Update Horario</h3>
 										    <h4>Seleciona el horario a editar</h4>
-										    <
 										    <br>
                                             <fieldset>
                                               <select class="form-control " name="horario" required>                                                
@@ -165,7 +164,7 @@
                                                   while ($resultado= mysqli_fetch_assoc($seleccionhorario)){                         
                                                 ?> 
                                                 <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                    <option value="<?php echo $resultado['id_horario']?>"><?php echo $resultado['id_horario']?></option>                                                
+                                                    <option value="<?php echo $resultado['id_horario']?>"><?php echo $resultado['id_horario']." - Hora: ".$resultado['hora']?></option>                                                
                                                 <?php
                                                   }
                                                 ?>

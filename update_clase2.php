@@ -33,7 +33,7 @@
 
 <body>
 	<?php 
-    session_start();
+    //session_start();
     if(!isset($_SESSION['tipousuario'])){
     //llamado del archivo mysql
     require_once 'Modelo/MySQL.php';
@@ -45,7 +45,7 @@
 //declaracion de variables metodo post
 $id_clase = $_POST['clase'];
 $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.clase.dia, asistencia.clase.horario_id_horario from clase WHERE asistencia.clase.id_clase = ".$id_clase."");
-$seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario"); 
+$seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario"); 
 //se inicia el recorrido para mostrar los datos de la BD
  while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
 //declaracion de variables
@@ -183,7 +183,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                                                   while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
                                                     ?>
                                                     <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']?></option>';
+                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']." - Hora: ".$valores1['hora']?></option>';
                                                     <?php
                                                   }
                                                 ?>

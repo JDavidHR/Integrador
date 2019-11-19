@@ -33,7 +33,7 @@
 
 <body>
 	  <?php 
-    session_start();
+    //session_start();
     if(!isset($_SESSION['tipousuario'])){
     //llamado del archivo mysql
     require_once 'Modelo/MySQL.php';
@@ -44,7 +44,7 @@
     //respectiva consulta para la seleccion de usuario
     $seleccionaula =$mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");  
     $seleccionmateria =$mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia"); 
-    $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");    
+    $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario");    
     //se desconecta de la base de datos
     $mysql->desconectar(); 
     }   
@@ -200,7 +200,7 @@
                                                   while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
                                                     ?>
                                                     <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']?></option>';
+                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']." - Hora: ".$valores1['hora']?></option>';
                                                     <?php
                                                   }
                                                 ?>

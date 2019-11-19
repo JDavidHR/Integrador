@@ -162,16 +162,16 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/update_clase.php" method="post">
+										<form id="contact" action="Controlador/update_clase.php?id=<?php echo $id_clase; ?>" method="post">
 										    <h3>Actualizar Clase</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
                                             <fieldset>
                                                 <label>ID Clase: </label>
-                                              <input placeholder="ID clase"  type="text" tabindex="1"  autofocus name="id" value="<?php echo $id_clase ?>">
+                                              <input placeholder="ID clase" type="text" tabindex="1" disabled name="id" value="<?php echo $id_clase ?>">
                                             </fieldset>
 										    <fieldset>
                                                 <label>Día:</label>
-										      <input placeholder="Dia" type="date" tabindex="2"  autofocus name="dia" class="form-control" value="<?php echo $dia ?>">
+										      <input placeholder="Dia" type="date" tabindex="2" name="dia" class="form-control" value="<?php echo $dia ?>">
 										    </fieldset>
 										    
                                             <fieldset>
@@ -193,7 +193,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                                             
 										    <br>
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
+                                              <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
                                             </fieldset>
 
                                         </form>

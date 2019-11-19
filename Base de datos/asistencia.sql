@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 19:15:44
+-- Tiempo de generación: 19-11-2019 a las 01:31:39
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -34,16 +34,17 @@ CREATE TABLE `administrador` (
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del administrador',
   `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del administrador',
   `contrasena` varchar(150) NOT NULL,
-  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apellidos`, `contrasena`, `tipo_usuario_id_tipo_usuario`) VALUES
-(1, '1006318241', 'Natalia', 'Agudelo Valdes', '1234', 3),
-(2, '1006291396', 'Juan David', 'Hoyos Ramirez', '1234', 3);
+INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apellidos`, `contrasena`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
+(1, '1006318241', 'Natalia', 'Agudelo Valdes', '1234', 3, 1),
+(2, '1006291396', 'Juan David', 'Hoyos Ramirez', '1234', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -106,8 +107,8 @@ CREATE TABLE `clase` (
 --
 
 INSERT INTO `clase` (`id_clase`, `dia`, `horario_id_horario`) VALUES
-(1, '2019-11-18', 1),
-(2, '2019-11-19', 1);
+(1, '2019-11-15', 1),
+(2, '2019-11-19', 3);
 
 -- --------------------------------------------------------
 
@@ -121,19 +122,20 @@ CREATE TABLE `docente` (
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del docente\n\n',
   `apellidos` varchar(45) NOT NULL,
   `contrasena` varchar(150) NOT NULL,
-  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `docente`
 --
 
-INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `contrasena`, `tipo_usuario_id_tipo_usuario`) VALUES
-(1, '12345', 'Luis Fernando', 'Alvarez', '123', 2),
-(2, '67890', 'Sonia Helena', 'Godoy', '123', 2),
-(3, '54321', 'Arvey', 'Barahona', '123', 2),
-(4, '09876', 'Jhovanny', 'Gil', '123', 2),
-(5, '10293', 'Edison', 'Jair', '123', 2);
+INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `contrasena`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
+(1, '12345', 'Luis Fernando', 'Alvarez', '123', 2, 1),
+(2, '67890', 'Sonia Helena', 'Godoy', '123', 2, 1),
+(3, '54321', 'Arvey', 'Barahona', '123', 2, 1),
+(4, '09876', 'Jhovanny', 'Gil', '123', 2, 1),
+(5, '10293', 'Edison', 'Jair', '123', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -171,17 +173,18 @@ CREATE TABLE `estudiante` (
   `semestre` varchar(45) NOT NULL,
   `horario_id_horario` int(11) NOT NULL COMMENT 'Identificador del horario',
   `Carrera_id_carrera` int(11) NOT NULL,
-  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `estudiante`
 --
 
-INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `horario_id_horario`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`) VALUES
-(1, '01', 'Juan Sebastian', 'Bayer', 'Diurna', 'IV', 1, 1, 1),
-(2, '02', 'Samuel', 'Fernandez Fernandez', 'Diurna', 'IV', 1, 1, 1),
-(3, '03', 'Sebastian', 'Ariza Rodriguez', 'Diurna', 'IV', 1, 1, 1);
+INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `horario_id_horario`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
+(1, '01', 'Juan Sebastian', 'Bayer', 'Diurna', 'IV', 3, 1, 1, 1),
+(2, '02', 'Samuel', 'Fernandez Fernandez', 'Diurna', 'IV', 3, 1, 1, 1),
+(3, '03', 'Sebastian', 'Ariza Rodriguez', 'Diurna', 'IV', 3, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -202,7 +205,7 @@ CREATE TABLE `horario` (
 
 INSERT INTO `horario` (`id_horario`, `hora`, `materia_id_materia`, `aula_id_aula`) VALUES
 (1, '07:45:00', 1, 1),
-(1, '10:30:00', 2, 2);
+(3, '10:30:00', 2, 2);
 
 -- --------------------------------------------------------
 
